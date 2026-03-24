@@ -1,5 +1,5 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans&family=Varela+Round&display=swap');
+@import url(base.css);
+@import url(components/navbar.css);
+@import url(components/container.css);
+@import url(components/bottom.css);
