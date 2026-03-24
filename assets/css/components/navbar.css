@@ -1,0 +1,29 @@
+nav {
+    font-family: "Ubuntu Sans", sans-serif;
+
+    ul {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        height: 65px;
+        background: black;
+        color: white;
+
+        li {
+            padding: 0 12px;
+        }
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        font-weight: bolder;
+        color: white;
+
+        img {
+            width: 44px;
+            padding: 0 8px;
+
+        }
+    }
+}
