@@ -1,13 +1,20 @@
 .bottom {
-    display: flex;
-    position: sticky;
-    height: 130px;
-    background: black;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
+  position: sticky;
+  height: 130px;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-    #myProgressBar {
-        width: 80vw;
-    }
+  #myProgressBar {
+    width: 80vw;
+  }
+}
+.icons {
+  margin-top: 34px;
+}
+.icons i {
+  cursor: pointer;
 }
