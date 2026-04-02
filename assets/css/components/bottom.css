@@ -7,10 +7,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  #myProgressBar {
-    width: 80vw;
-  }
+}
+#myProgressBar {
+  width: 80vw;
 }
 .icons {
   margin-top: 34px;
