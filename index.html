@@ -1,103 +1,54 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Musictify</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <div class="app-shell">
-        <aside class="sidebar" aria-label="Main navigation">
-            <div class="brand">
-                <div class="brand-main">
-                    <img src="assets/images/logo.png" alt="Musictify logo">
-                    <span>Musictify</span>
-                </div>
-                <button id="navToggle" class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
-                    Menu
-                </button>
-            </div>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li class="brand">
+          <img src="assets/images/logo.png" alt="Musictify" />
+          <span>Musictify</span>
+        </li>
+        <li>Home</li>
+        <li>About</li>
+      </ul>
+    </nav>
 
-            <div id="sidebarContent" class="sidebar-content">
-                <nav class="menu">
-                    <button class="menu-item is-active" type="button">Home</button>
-                    <button class="menu-item" type="button">Discover</button>
-                    <button class="menu-item" type="button">Library</button>
-                    <button class="menu-item" type="button">Liked Songs</button>
-                </nav>
-
-                <div class="playlist-chip">
-                    <p class="chip-label">Featured Mix</p>
-                    <h3>Best of NCS</h3>
-                    <p class="chip-meta">10 songs - No Copyright Sounds</p>
-                </div>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <header class="topbar">
-                <div>
-                    <p class="eyebrow">Daily Soundtrack</p>
-                    <h1>Good evening, let's play something bright</h1>
-                </div>
-                <button class="cta" type="button">Upgrade</button>
-            </header>
-
-            <section class="hero-grid" aria-label="Curated highlights">
-                <article class="hero-card">
-                    <p>Trending Now</p>
-                    <h2>Electro Pulse</h2>
-                    <span>Fresh drops for coding nights</span>
-                </article>
-                <article class="hero-card alt">
-                    <p>For You</p>
-                    <h2>Focus Flow</h2>
-                    <span>Keep momentum without distractions</span>
-                </article>
-            </section>
-
-            <section class="songs-section" aria-label="Song list">
-                <div class="section-head">
-                    <h2>Best of NCS</h2>
-                    <p>Tap any track and enjoy</p>
-                </div>
-                <div id="songList" class="song-list"></div>
-            </section>
-        </main>
+    <div class="container">
+      <div class="songList">
+        <h1>Best of NCS - No Copyright Sounds</h1>
+        <div>
+          <div class="songItem">
+            <img src="assets/images/covers/10.jpg" alt="1" />
+            <span>True Love</span>
+            <span class="songListplay">
+              <span>04:32</span><i class="far fa-play-circle"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+      <div class="songBanner"></div>
     </div>
 
-    <footer class="player" aria-label="Music player controls">
-        <div class="player-track">
-            <img id="currentCover" src="assets/images/covers/1.jpg" alt="Current song cover">
-            <div>
-                <p id="currentTitle">Cielo - Huma Huma</p>
-                <span id="currentArtist">NCS Vibes</span>
-            </div>
-        </div>
-
-        <div class="player-controls">
-            <div class="control-buttons">
-                <button id="prevBtn" class="control" type="button" aria-label="Previous song">&lt;&lt;</button>
-                <button id="playPauseBtn" class="control play" type="button" aria-label="Play or pause">&gt;</button>
-                <button id="nextBtn" class="control" type="button" aria-label="Next song">&gt;&gt;</button>
-            </div>
-            <div class="timeline-wrap">
-                <span id="currentTime">0:00</span>
-                <input type="range" id="progressBar" min="0" max="100" value="0" aria-label="Song progress">
-                <span id="duration">0:00</span>
-            </div>
-        </div>
-
-        <div class="player-volume">
-            <label for="volumeBar">Vol</label>
-            <input type="range" id="volumeBar" min="0" max="100" value="80" aria-label="Volume control">
-        </div>
-    </footer>
+    <div class="bottom">
+      <input type="range" name="range" id="myProgressBar" min="0" max="100" />
+      <div class="icons">
+        <i class="fas fa-3x fa-backward"></i>
+        <i class="fas fa-3x fa-pause-circle"></i>
+        <i class="fas fa-3x fa-play-circle"></i>
+        <i class="fas fa-3x fa-stop-circle"></i>
+        <i class="fas fa-3x fa-step-forward"></i>
+      </div>
+    </div>
 
     <script src="assets/js/main.js"></script>
-</body>
+  </body>
 </html>
