@@ -1,0 +1,322 @@
+/* Auth Pages */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    .auth-container {
+        background: rgba(13, 29, 25, 0.9);
+        border: 1px solid var(--stroke);
+        border-radius: 24px;
+        padding: 40px;
+        width: 100%;
+        max-width: 420px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .auth-brand {
+        text-align: center;
+        margin-bottom: 32px;
+
+        .auth-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+            color: #07270f;
+        }
+
+        h1 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+    }
+}
+
+.auth-form {
+    h2 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+}
+
+.social-login-row {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 20px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 44px;
+
+    &:hover {
+        transform: translateY(-1px);
+        border-color: var(--brand);
+        background: rgba(30, 215, 96, 0.08);
+        box-shadow: 0 4px 12px rgba(30, 215, 96, 0.15);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &.google {
+        border-color: rgba(219, 68, 55, 0.3);
+
+        &:hover {
+            border-color: #DB4437;
+            background: rgba(219, 68, 55, 0.1);
+        }
+    }
+
+    &.facebook {
+        border-color: rgba(66, 103, 178, 0.3);
+
+        &:hover {
+            border-color: #4267B2;
+            background: rgba(66, 103, 178, 0.1);
+        }
+    }
+
+    svg,
+    i {
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+    }
+
+    svg {
+        color: #DB4437;
+    }
+
+    &.google:hover svg {
+        color: #DB4437;
+    }
+
+    &.facebook svg {
+        color: #4267B2;
+    }
+
+    &.facebook:hover svg {
+        color: #4267B2;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--stroke);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--brand);
+            background: rgba(30, 215, 96, 0.08);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+
+        &::placeholder {
+            color: var(--muted);
+            opacity: 0.5;
+        }
+    }
+}
+
+.error-msg {
+    display: block;
+    color: var(--danger);
+    font-size: 12px;
+    margin-top: 6px;
+    min-height: 16px;
+}
+
+/* Buttons */
+.btn-primary {
+    border: 0;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+    color: #07270f;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 12px;
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(30, 215, 96, 0.35);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+
+    a,
+    .auth-link {
+        color: var(--brand);
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+/* Clerk-specific styles */
+.clerk-card {
+    background: rgba(13, 29, 25, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    margin: 20px 0 !important;
+}
+
+.clerk-input {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: var(--text) !important;
+    padding: 12px 14px !important;
+
+    &:focus {
+        border-color: var(--brand) !important;
+        outline: none !important;
+    }
+}
+
+.clerk-label {
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.clerk-btn-primary {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%) !important;
+    color: #07270f !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    padding: 12px 24px !important;
+    width: 100% !important;
+    border: none !important;
+}
+
+.clerk-footer {
+    margin-top: 0 !important;
+}
+
+.clerk-social-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    margin: 16px 0 !important;
+}
+
+.clerk-social-button {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: var(--text) !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+
+    &:hover {
+        border-color: var(--brand) !important;
+        background: rgba(30, 215, 96, 0.1) !important;
+    }
+}
+
+.clerk-form-button {
+    margin-top: 16px !important;
+}
+
+.clerk-v2-box {
+    background: transparent !important;
+}
+
+.clerk-v2-alternatives {
+    margin-top: 16px !important;
+}
+
+/* Hide Clerk default button in custom container */
+#clerk-signin-root:empty,
+#clerk-signup-root:empty {
+    display: none;
+}
+
+/* Social button icons in local form */
+.social-login-note {
+    text-align: center;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--muted);
+}

@@ -1,0 +1,177 @@
+/* App Shell */
+.app-shell {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 24px;
+    padding: 22px;
+    padding-bottom: 136px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Sidebar */
+.sidebar {
+    background: rgba(10, 24, 20, 0.88);
+    border: 1px solid var(--stroke);
+    border-radius: 22px;
+    padding: 24px 18px;
+    backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    position: sticky;
+    top: 22px;
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 26px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--stroke);
+
+            img {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                object-fit: cover;
+            }
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+
+            .menu-item {
+                border: 0;
+                background: transparent;
+                color: var(--muted);
+                text-align: left;
+                padding: 12px 14px;
+                border-radius: 12px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                &:hover {
+                    color: var(--text);
+                    background: rgba(255, 255, 255, 0.04);
+                }
+
+                &.is-active {
+                    color: var(--text);
+                    background: rgba(30, 215, 96, 0.15);
+                }
+
+                i {
+                    width: 18px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .playlist-chip {
+            background: linear-gradient(155deg, rgba(30, 215, 96, 0.18), rgba(30, 215, 96, 0.06));
+            border: 1px solid rgba(30, 215, 96, 0.25);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: auto;
+
+            .chip-label {
+                color: #a8f5d0;
+                opacity: 0.8;
+                font-size: 10px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            h3 {
+                margin-top: 8px;
+                font-size: 1.1rem;
+                font-family: "Space Grotesk", sans-serif;
+                font-weight: 700;
+            }
+
+            .chip-meta {
+                margin-top: 6px;
+                font-size: 12px;
+                color: #8fd7c1;
+            }
+        }
+    }
+
+    .sidebar-footer {
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid var(--stroke);
+    }
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Topbar */
+.topbar {
+    background: linear-gradient(120deg, rgba(19, 40, 35, 0.95), rgba(9, 30, 40, 0.9));
+    border: 1px solid var(--stroke);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .eyebrow {
+        color: #9bd8b3;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-top: 6px;
+    }
+}
+
+.cta {
+    border: 0;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+    color: #07270f;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 215, 96, 0.4);
+    }
+}
