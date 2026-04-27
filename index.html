@@ -1,54 +1,264 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Musictify</title>
+    <title>Musictify - Music Streaming</title>
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    />
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li class="brand">
-          <img src="assets/images/logo.png" alt="Musictify" />
-          <span>Musictify</span>
-        </li>
-        <li>Home</li>
-        <li>About</li>
-      </ul>
-    </nav>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="auth-page">
+        <div class="auth-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h1>Musictify</h1>
+                <p>Premium music streaming</p>
+            </div>
 
-    <div class="container">
-      <div class="songList">
-        <h1>Best of NCS - No Copyright Sounds</h1>
-        <div>
-          <div class="songItem">
-            <img src="assets/images/covers/10.jpg" alt="1" />
-            <span>True Love</span>
-            <span class="songListplay">
-              <span>04:32</span><i class="far fa-play-circle"></i
-            ></span>
-          </div>
+                <!-- Clerk Sign-In Component -->
+                <div id="clerk-signin-root" style="margin:20px 0;display:none;">
+                    <div class="clerk-card">
+                        <div class="clerk-social-login-row">
+                            <button class="social-btn google" onclick="clerkSignInWithGoogle()" type="button">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button class="social-btn facebook" onclick="clerkSignInWithFacebook()" type="button">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Local Login Form -->
+                <div id="local-login-form">
+                    <div class="social-login-row">
+                        <button class="social-btn google" onclick="attemptGoogleLogin()" type="button">
+                            <svg viewBox="0 0 48 48" width="20" height="20"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook" onclick="attemptFacebookLogin()" type="button">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+                    <div style="text-align:center;font-size:13px;color:var(--muted);margin:16px 0 20px;position:relative;">
+                        <span style="background:var(--bg);padding:0 12px;">or continue with email</span>
+                    </div>
+                    <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" placeholder="your@email.com" required />
+                        <span class="error-msg" id="loginEmailErr"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter password" required />
+                        <span class="error-msg" id="loginPasswordErr"></span>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Log In</button>
+                    <p class="auth-switch" style="text-align:center;">Don't have an account? <a href="#" onclick="showRegister(event); return false;" style="color:var(--brand);font-weight:600;">Sign up</a></p>
+                </form>
+            </div>
         </div>
-      </div>
-      <div class="songBanner"></div>
     </div>
 
-    <div class="bottom">
-      <input type="range" name="range" id="myProgressBar" min="0" max="100" />
-      <div class="icons">
-        <i class="fas fa-3x fa-backward"></i>
-        <i class="fas fa-3x fa-pause-circle"></i>
-        <i class="fas fa-3x fa-play-circle"></i>
-        <i class="fas fa-3x fa-stop-circle"></i>
-        <i class="fas fa-3x fa-step-forward"></i>
-      </div>
+    <!-- Register Page -->
+    <div id="registerPage" class="auth-page hidden">
+        <div class="auth-container">
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h1>Musictify</h1>
+                <p>Premium music streaming</p>
+            </div>
+
+                <!-- Clerk Sign-Up Component -->
+                <div id="clerk-signup-root" style="margin:20px 0;display:none;">
+                    <div class="clerk-card">
+                        <div class="clerk-social-login-row">
+                            <button class="social-btn google" onclick="clerkSignUpWithGoogle()" type="button">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button class="social-btn facebook" onclick="clerkSignUpWithFacebook()" type="button">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local Register Form -->
+                <div id="local-register-form">
+                    <div class="social-login-row">
+                        <button class="social-btn google" onclick="attemptGoogleRegister()" type="button">
+                            <svg viewBox="0 0 48 48" width="20" height="20"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook" onclick="attemptFacebookRegister()" type="button">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+                    <div style="text-align:center;font-size:13px;color:var(--muted);margin:16px 0 20px;position:relative;">
+                        <span style="background:var(--bg);padding:0 12px;">or sign up with email</span>
+                    </div>
+                    <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" placeholder="Your name" required />
+                        <span class="error-msg" id="regNameErr"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" placeholder="your@email.com" required />
+                        <span class="error-msg" id="regEmailErr"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" placeholder="Create password (min 6 chars)" required />
+                        <span class="error-msg" id="regPasswordErr"></span>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Sign Up</button>
+                    <p class="auth-switch" style="text-align:center;">Already have an account? <a href="#" onclick="showLogin(event); return false;" style="color:var(--brand);font-weight:600;">Log in</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <div class="app-shell">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <div class="brand">
+                        <div class="brand-main">
+                            <img src="assets/images/logo.png" alt="Musictify" id="sidebarLogo" />
+                            <span>Musictify</span>
+                        </div>
+                    </div>
+                    <nav class="menu" role="navigation" aria-label="Main navigation">
+                        <button class="menu-item is-active" data-page="home">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                        <button class="menu-item" data-page="search">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="menu-item" data-page="library">
+                            <i class="fas fa-music"></i> My Library
+                        </button>
+                        <button class="menu-item" data-page="liked">
+                            <i class="fas fa-heart"></i> Liked Songs
+                        </button>
+                    </nav>
+                    <div class="playlist-chip">
+                        <div class="chip-label">Daily Playlist</div>
+                        <h3>Chill Vibes</h3>
+                        <p class="chip-meta">32 songs • Updated today</p>
+                    </div>
+                </div>
+                <div class="sidebar-footer">
+                    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.03);margin-bottom:8px;">
+                        <div style="width:32px;height:32px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#07270f;font-weight:700;font-size:14px;" id="userAvatar">U</div>
+                        <div style="flex:1;min-width:0;">
+                            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="userName">User</div>
+                            <div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="userEmail">user@example.com</div>
+                        </div>
+                    </div>
+                    <button class="menu-item" style="width:100%;justify-content:center;" onclick="signOut()">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <header class="topbar">
+                    <div>
+                        <span class="eyebrow">Trending now</span>
+                        <h1 id="pageTitle">Best of NCS - No Copyright Sounds</h1>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:center;">
+                        <button class="cta" id="upgradeBtn">Upgrade Pro</button>
+                    </div>
+                </header>
+
+                <!-- Hero Section -->
+                <section class="hero-grid" id="heroSection">
+                    <article class="hero-card">
+                        <p>Featured Release</p>
+                        <h2>NCS Best of 2024</h2>
+                        <span>Listen now <i class="fas fa-arrow-right"></i></span>
+                    </article>
+                    <article class="hero-card alt">
+                        <p>New This Week</p>
+                        <h2>Fresh Drops</h2>
+                        <span>Explore all <i class="fas fa-arrow-right"></i></span>
+                    </article>
+                </section>
+
+                <!-- Song List -->
+                <section class="songs-section">
+                    <div class="section-head">
+                        <h2 id="sectionTitle">Popular Tracks</h2>
+                        <p id="sectionSubtitle">Top tracks from NCS artists</p>
+                    </div>
+                    <div class="song-list" id="songList"></div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Fixed Player -->
+        <div class="player" id="player">
+            <div class="player-track">
+                <img src="assets/images/covers/1.jpg" alt="Now playing" id="currentCover" width="50" height="50" />
+                <div>
+                    <p id="currentTitle">Select a song</p>
+                    <span id="currentArtist">-</span>
+                </div>
+            </div>
+            <div class="player-controls">
+                <div class="control-buttons">
+                    <button class="control" id="shuffleBtn" aria-label="Shuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button class="control" id="prevBtn" aria-label="Previous">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control play" id="playPauseBtn" aria-label="Play">
+                        <i class="fas fa-play" id="playIcon"></i>
+                    </button>
+                    <button class="control" id="nextBtn" aria-label="Next">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control" id="repeatBtn" aria-label="Repeat">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                <div class="timeline-wrap">
+                    <span id="currentTime">0:00</span>
+                    <input type="range" id="progressBar" min="0" max="100" value="0" aria-label="Progress" />
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            <div class="player-volume">
+                <button class="control" id="volumeMuteBtn" aria-label="Mute">
+                    <i class="fas fa-volume-up" id="volumeIcon"></i>
+                </button>
+                <input type="range" id="volumeBar" min="0" max="100" value="80" style="width:80px" />
+            </div>
+        </div>
     </div>
 
     <script src="assets/js/main.js"></script>
-  </body>
+</body>
 </html>
