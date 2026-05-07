@@ -1,7 +1,13 @@
 const PLAY_ICON = ">";
 const PAUSE_ICON = "||";
-const CLERK_PUB_KEY =
-  "pk_test_aW1wcm92ZWQtZG92ZS05MC5jbGVyay5hY2NvdW50cy5kZXYk";
+
+// API Configuration - automatically detect backend URL
+const API_URL = window.location.origin; // Same origin as frontend
+const FRONTEND_URL = window.location.origin;
+const CLERK_PUBLISHABLE_KEY = "pk_test_aW1wcm92ZWQtZG92ZS05MC5jbGVyay5hY2NvdW50cy5kZXYk";
+
+// Clerk Frontend API URL (for OAuth)
+const CLERK_FRONTEND_API = "https://improved-dove-90.clerk.accounts.dev";
 
 const songs = [
   {
@@ -80,8 +86,6 @@ let currentSongIndex = 0;
 let shuffleMode = false;
 let repeatMode = false;
 let previousVol = 80;
-let clerkLoaded = false;
-let clerkInstance = null;
 
 const audio = new Audio();
 audio.volume = 0.8;
